@@ -12,14 +12,15 @@ const BlurImage: React.FC = () => {
   return (
     <div className=" container mx-auto flex gap-4 p-4 justify-between">
       {images.map((src, index) => (
-        <div key={index} className="relative  overflow-hidden rounded-lg">
+        <div key={index} className="group relative  overflow-hidden rounded-lg">
           <Image
             src={src}
             alt={`Image ${index + 1}`}
             width={470}
             height={320}
-            className=" object-cover transition duration-500 filter  hover:blur-[1.5px]"
+            className=" object-cover "
           />
+          <div className="absolute inset-0 -translate-y-100  h-full w-full bg-[rgba(255,255,255,0.4)]  transition-all duration-300 ease-in group-hover:translate-0 "></div>{" "}
         </div>
       ))}
     </div>

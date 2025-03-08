@@ -9,6 +9,7 @@ import {
   HeadphonesIcon,
   HeartIcon,
   ShoppingCartIcon,
+  SidebarIcon,
 } from "lucide-react";
 import Image from "next/image";
 import {
@@ -23,97 +24,53 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
-  const [isClient, setIsClient] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState({
-    account: false,
-    currency: false,
-  });
   const [openDropdown, setOpenDropdown] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!(event.target as HTMLElement).closest(".dropdown")) {
-        setDropdownOpen({ account: false, currency: false });
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  if (!isClient) return null;
-
-  const toggleDropdown = (dropdown: keyof typeof dropdownOpen) => {
-    setDropdownOpen((prev) => ({
-      ...prev,
-      [dropdown]: !prev[dropdown],
-      [dropdown === "account" ? "currency" : "account"]: false,
-    }));
-  };
 
   return (
     <header className="">
       {/* Top Bar */}
-      <div className="bg-gray-400">
+      <div className="bg-gray-300 p-2 ">
         <div className="container mx-auto">
           <div className="flex justify-between p-2">
             <div className="text-sm font-semibold">Free Shipping</div>
-            <div className="flex space-x-4 items-center">
+            <div className="flex space-x-6 items-center mr-8">
               <div className="flex items-center space-x-1 cursor-pointer">
-                <LockIcon />
+                <LockIcon className="text-primary" />
                 <span>Sign In</span>
               </div>
               <div className="flex items-center space-x-1 cursor-pointer">
-                <GiftIcon />
+                <GiftIcon className="text-primary" />
                 <span>Gift Certificates</span>
               </div>
 
               {/* My Account Dropdown */}
-              <div className="relative dropdown">
-                <div
-                  className="flex items-center space-x-1 cursor-pointer"
-                  onClick={() => toggleDropdown("account")}
-                  aria-expanded={dropdownOpen.account}
-                >
-                  <CircleUserIcon />
-                  <span>My Account</span>
+
+              <div className="group relative inline-block">
+                <div className="flex items-center space-x-1 cursor-pointer">
+                  <CircleUserIcon className="text-primary" />
+                  <div className="cursor-pointer">My Account</div>
                 </div>
-                {dropdownOpen.account && (
-                  <div className="absolute bg-white border shadow-md mt-2 p-2 w-24">
-                    <div className="cursor-pointer hover:bg-gray-200 p-1">
-                      Check Out
-                    </div>
-                    <div className="cursor-pointer hover:bg-gray-200 p-1">
-                      Sign in
-                    </div>
+                <div className="absolute left-0 mt-2 w-32 bg-white shadow-md rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 top-[32px]">
+                  <div className="p-2 hover:bg-gray-200 cursor-pointer">
+                    Check IN
                   </div>
-                )}
+                  <div className="p-2 hover:bg-gray-200 cursor-pointer">
+                    Sign Out
+                  </div>
+                </div>
               </div>
 
               {/* Currency Dropdown */}
-              <div className="relative dropdown">
-                <div
-                  className="cursor-pointer"
-                  onClick={() => toggleDropdown("currency")}
-                  aria-expanded={dropdownOpen.currency}
-                >
-                  USD
-                </div>
-                {dropdownOpen.currency && (
-                  <div className="absolute bg-white border shadow-md mt-2 p-2 w-24">
-                    <div className="cursor-pointer hover:bg-gray-200 p-1">
-                      USD Dollar
-                    </div>
-                    <div className="cursor-pointer hover:bg-gray-200 p-1">
-                      AUD
-                    </div>
+              <div className="group relative inline-block">
+                <div className="cursor-pointer">USD</div>
+                <div className="absolute left-0 mt-2 w-32 bg-white shadow-md rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 top-8">
+                  <div className="p-2 hover:bg-gray-200 hover:text-primary cursor-pointer">
+                    AUD
                   </div>
-                )}
+                  <div className="p-2 hover:bg-gray-200 hover:text-primary cursor-pointer">
+                    Us Dollar
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -121,26 +78,30 @@ const Header = () => {
       </div>
 
       {/* Middle Header */}
-      <div className="container mx-auto flex items-center justify-between p-4">
+      <div className="container mx-auto flex items-center justify-between p-8 ">
         {/* Logo */}
         <Image
           src="/image/logo_1521851058__88672.webp"
           alt="icon"
           height={100}
           width={100}
+          className="h-16 w-28"
         />
 
         {/* Search Bar */}
-        <div className="flex items-center border rounded p-2 w-full max-w-md">
+        <div className="flex items-center border-4 rounded-full w-[750px] p-2 max-w-md border-orange-600 bg-white shadow-md">
           <input
             type="text"
             placeholder="Search the store"
-            className="w-full p-1 outline-none"
+            className="w-full p-2 outline-none bg-transparent"
           />
-          <SearchIcon className="ml-2 cursor-pointer" />
+          <button className="p-2 bg-primary text-white rounded-full hover:bg-orange-700 transition duration-300">
+            <SearchIcon className="w-5 h-5" />
+          </button>
         </div>
+
         <div className="flex items-center space-x-4 p-4">
-          <HeadphonesIcon />
+          <HeadphonesIcon className="h-16 w-16  text-primary" />
           <div>
             <h3>Call Us: 0000000</h3>
             <h3>Email: bbhjdj@gmail.com</h3>
@@ -149,82 +110,123 @@ const Header = () => {
       </div>
 
       {/* Categories */}
-      <div className="bg-gray-400">
-        <div className="container mx-auto flex justify-between p-4">
-          <div className="flex gap-6 items-center">
-            {/* Categories Dropdown */}
+      <div className=" bg-gray-300 shadow ">
+        <div className="bg-white container mx-auto">
+          <div className=" flex">
             <DropdownMenu
               open={openDropdown}
               onOpenChange={() => setOpenDropdown(false)}
             >
               <DropdownMenuTrigger
-                className="cursor-pointer"
+                className="bg-orange-600 p-6 shadow-md text-white uppercase font-bold cursor-pointer hover:bg-orange-700 transition-colors rounded-t-2xl -mt-2 border-none"
                 onMouseEnter={() => setOpenDropdown(true)}
               >
-                ALL CATEGORIES
+                <div className="flex gap-4 items-center w-[300px]">
+                  <SidebarIcon />
+                  ALL CATEGORIES
+                </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-56"
+                className="w-[350px] bg-amber-300  border-none -mt-1"
                 onMouseLeave={() => setOpenDropdown(false)}
               >
                 <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>Fashion</DropdownMenuSubTrigger>
+                  <DropdownMenuSubTrigger className="cursor-pointer">
+                    Fashion
+                  </DropdownMenuSubTrigger>
                   <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuItem>Clothing</DropdownMenuItem>
-                      <DropdownMenuItem>Delicacies</DropdownMenuItem>
-                      <DropdownMenuItem>More...</DropdownMenuItem>
+                    <DropdownMenuSubContent className="w-56 bg-amber-300 border-none">
+                      <DropdownMenuItem className="cursor-pointer">
+                        Clothing
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        Delicacies
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        More...
+                      </DropdownMenuItem>
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
                 <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>Kitchen</DropdownMenuSubTrigger>
+                  <DropdownMenuSubTrigger className="cursor-pointer">
+                    Kitchen
+                  </DropdownMenuSubTrigger>
                   <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
-                      <DropdownMenuItem>Angene mafin</DropdownMenuItem>
-                      <DropdownMenuItem>Boys News</DropdownMenuItem>
-                      <DropdownMenuItem>More...</DropdownMenuItem>
+                    <DropdownMenuSubContent className="w-56 bg-amber-300 border-none">
+                      <DropdownMenuItem className="cursor-pointer">
+                        Angene mafin
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        Boys News
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        More...
+                      </DropdownMenuItem>
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
                 <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>Computer</DropdownMenuSubTrigger>
+                  <DropdownMenuSubTrigger className="cursor-pointer">
+                    Computer
+                  </DropdownMenuSubTrigger>
                   <DropdownMenuPortal>
-                    <DropdownMenuSubContent>
+                    <DropdownMenuSubContent className="w-56 bg-amber-300 border-none">
                       <DropdownMenuSub>
-                        <DropdownMenuSubTrigger>
+                        <DropdownMenuSubTrigger className="cursor-pointer">
                           Clothing
                         </DropdownMenuSubTrigger>
                         <DropdownMenuPortal>
-                          <DropdownMenuSubContent>
-                            <DropdownMenuItem>Angene mafin</DropdownMenuItem>
-                            <DropdownMenuItem>
+                          <DropdownMenuSubContent className="w-56 bg-amber-300 border-none">
+                            <DropdownMenuItem className="cursor-pointer">
+                              Angene mafin
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="cursor-pointer">
                               Cake and coociks
                             </DropdownMenuItem>
-                            <DropdownMenuItem>More...</DropdownMenuItem>
+                            <DropdownMenuItem className="cursor-pointer">
+                              More...
+                            </DropdownMenuItem>
                           </DropdownMenuSubContent>
                         </DropdownMenuPortal>
                       </DropdownMenuSub>
-                      <DropdownMenuItem>Handbag Juelary</DropdownMenuItem>
-                      <DropdownMenuItem>More...</DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        Handbag Juelary
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        More...
+                      </DropdownMenuItem>
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
-                <DropdownMenuItem>Bags</DropdownMenuItem>
-                <DropdownMenuItem>Watches</DropdownMenuItem>
-                <DropdownMenuItem>Smartphone</DropdownMenuItem>
-                <DropdownMenuItem>Health & Beauty</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  Bags
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  Watches
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  Smartphone
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  Health & Beauty
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <div>HOME</div>
-            <div>LAYOUT</div>
-            <div>BLOG</div>
-            <div>ABOUT US</div>
-            <div>BONUS PAGE</div>
-          </div>
-          <div className="flex items-center gap-4">
-            <HeartIcon className="h-6 w-6" />
-            <ShoppingCartIcon className="h-6 w-6" />
+            <div className="flex-1 flex justify-between px-16  bg-gray-300 shadow">
+              <div className="flex gap-6 items-center text-2xl">
+                {/* Categories Dropdown */}
+                <div className="cursor-pointer">HOME</div>
+                <div className="cursor-pointer">LAYOUT</div>
+                <div className="cursor-pointer">BLOG</div>
+                <div className="cursor-pointer">ABOUT US</div>
+                <div className="cursor-pointer">BONUS PAGE</div>
+              </div>
+              <div className="flex  items-center gap-4">
+                <HeartIcon className="h-6 w-6 cursor-pointer" />
+                <ShoppingCartIcon className="h-6 w-6 cursor-pointer" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
