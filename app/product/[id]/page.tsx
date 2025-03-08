@@ -3,10 +3,22 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchProducts } from "@/lib/api"; // Import API function
+// import { fetchProducts } from "/lib/api"; // Import API function
 import { ShoppingCartIcon } from "lucide-react";
 import { useParams } from "next/navigation";
+import axiosInstance from "@/lib/api"; // Adjust the import path as needed
+import { ParamValue } from "next/dist/server/request/params";
 
+// Fetch all products
+export async function fetchProducts() {
+  try {
+    const response = await axiosInstance.get("/product/");
+    return response.data.data || []; // Ensure it's an array
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
 interface ImageType {
   secure_url: string;
   optimizeUrl: string;
@@ -40,7 +52,9 @@ function ProductDetails() {
   useEffect(() => {
     const fetchProductDetails = async () => {
       const products = await fetchProducts();
-      const productDetail = products.find((p) => p._id === id);
+      const productDetail = products.find(
+        (p: { _id: ParamValue }) => p._id === id
+      );
       if (productDetail) {
         setProduct(productDetail);
         setMainImage(productDetail.images[0]?.secure_url || "");

@@ -1,8 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
-import { fetchProducts } from "../lib/api";
+// import { fetchProducts } from "../lib/api";
 import ReUseProductPage from "./ReUseProductPage";
+import axiosInstance from "../lib/api"; // Adjust the import path as needed
 
+// Fetch all products
+export async function fetchProducts() {
+  try {
+    const response = await axiosInstance.get("/product/");
+    return response.data.data || []; // Ensure it's an array
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
 // Fashion Categories
 const FashionCategories = [
   "Clothing",

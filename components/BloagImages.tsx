@@ -44,12 +44,43 @@ const images = [
   },
 ];
 
+// Custom Previous Arrow
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CustomPrevArrow = (props: { onClick: any }) => {
+  const { onClick } = props;
+  return (
+    <button
+      onClick={onClick}
+      className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 z-10"
+    >
+      &#10094; {/* Left arrow symbol */}
+    </button>
+  );
+};
+
+// Custom Next Arrow
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CustomNextArrow = (props: { onClick: any }) => {
+  const { onClick } = props;
+  return (
+    <button
+      onClick={onClick}
+      className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 z-10"
+    >
+      &#10095; {/* Right arrow symbol */}
+    </button>
+  );
+};
+
 function ImageSlider() {
   const settings = {
-    infinite: true,
+    // dots: true, // Corrected from `dot` to `dots`
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    prevArrow: <CustomPrevArrow onClick={undefined} />, // Add custom previous arrow
+    nextArrow: <CustomNextArrow onClick={undefined} />, // Add custom next arrow
     responsive: [
       {
         breakpoint: 1024,
@@ -69,40 +100,46 @@ function ImageSlider() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <Slider {...settings}>
-        {images.map((image, index) => (
-          <div key={index} className="px-2">
-            <div className="border border-gray-300 rounded-lg overflow-hidden">
-              {/* Image */}
-              <Image
-                src={image.url}
-                alt={image.name}
-                className="w-full"
-                width={300}
-                height={300}
-                property="true"
-              />
+    <div className="container mx-auto p-4 relative">
+      <h1 className="uppercase text-2xl p-2">From our blog</h1>
 
-              {/* Title */}
-              <h1 className="uppercase p-2 font-bold text-lg">{image.name}</h1>
+      <div className="relative">
+        <Slider {...settings}>
+          {images.map((image, index) => (
+            <div key={index} className="px-2">
+              <div className="border border-gray-300 rounded-lg overflow-hidden">
+                {/* Image */}
+                <Image
+                  src={image.url}
+                  alt={image.name}
+                  className="w-full"
+                  width={300}
+                  height={300}
+                  property="true"
+                />
 
-              {/* Metadata Section */}
-              <div className="flex gap-4 p-2 border-b border-gray-300">
-                <h3 className="text-xs">{image.user}</h3>
-                <h3 className="text-xs">{image.date}</h3>
-              </div>
-
-              {/* Read More Button */}
-              <button className="group p-2 mt-2 px-4 text-orange-600 hover:bg-amber-600 hover:text-white hover:translate-x-1 duration-300 rounded-2xl overflow-hidden">
-                <h1 className="group-hover:translate-x-2 text-xs">
-                  &#8667; Read More
+                {/* Title */}
+                <h1 className="uppercase p-2 font-bold text-lg">
+                  {image.name}
                 </h1>
-              </button>
+
+                {/* Metadata Section */}
+                <div className="flex gap-4 p-2 border-b border-gray-300">
+                  <h3 className="text-xs">{image.user}</h3>
+                  <h3 className="text-xs">{image.date}</h3>
+                </div>
+
+                {/* Read More Button */}
+                <button className="group p-2 mt-2 px-4 text-orange-600 hover:bg-amber-600 hover:text-white hover:translate-x-1 duration-300 rounded-2xl overflow-hidden">
+                  <h1 className="group-hover:translate-x-2 text-xs">
+                    &#8667; Read More
+                  </h1>
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 }

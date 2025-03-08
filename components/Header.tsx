@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   LockIcon,
   GiftIcon,
@@ -10,6 +10,7 @@ import {
   HeartIcon,
   ShoppingCartIcon,
   SidebarIcon,
+  AlignJustify,
 } from "lucide-react";
 import Image from "next/image";
 import {
@@ -23,15 +24,17 @@ import {
   DropdownMenuSub,
 } from "@/components/ui/dropdown-menu";
 
+import Link from "next/link";
+
 const Header = () => {
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="">
       {/* Top Bar */}
       <div className="bg-gray-300 p-2 ">
         <div className="container mx-auto">
-          <div className="flex justify-between p-2">
+          <div className="hidden md:flex justify-between p-2">
             <div className="text-sm font-semibold">Free Shipping</div>
             <div className="flex space-x-6 items-center mr-8">
               <div className="flex items-center space-x-1 cursor-pointer">
@@ -78,7 +81,7 @@ const Header = () => {
       </div>
 
       {/* Middle Header */}
-      <div className="container mx-auto flex items-center justify-between p-8 ">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between p-8 ">
         {/* Logo */}
         <Image
           src="/image/logo_1521851058__88672.webp"
@@ -112,23 +115,18 @@ const Header = () => {
       {/* Categories */}
       <div className=" bg-gray-300 shadow ">
         <div className="bg-white container mx-auto">
-          <div className=" flex">
-            <DropdownMenu
-              open={openDropdown}
-              onOpenChange={() => setOpenDropdown(false)}
-            >
-              <DropdownMenuTrigger
-                className="bg-orange-600 p-6 shadow-md text-white uppercase font-bold cursor-pointer hover:bg-orange-700 transition-colors rounded-t-2xl -mt-2 border-none"
-                onMouseEnter={() => setOpenDropdown(true)}
-              >
-                <div className="flex gap-4 items-center w-[300px]">
+          <div className=" flex flex-col sm:flex-row gap-2 sm:gap-0">
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <div
+                  className={`flex gap-4 uppercase items-center w-[300px] md:w-[300px] bg-orange-600 p-6`}
+                >
                   <SidebarIcon />
                   ALL CATEGORIES
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-[350px] bg-amber-300  border-none -mt-1"
-                onMouseLeave={() => setOpenDropdown(false)}
+                className={`  w-[300px] md:w-[300px] bg-amber-300  border-none -mt-1`}
               >
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger className="cursor-pointer">
@@ -214,14 +212,86 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex-1 flex justify-between px-16  bg-gray-300 shadow">
-              <div className="flex gap-6 items-center text-2xl">
-                {/* Categories Dropdown */}
-                <div className="cursor-pointer">HOME</div>
-                <div className="cursor-pointer">LAYOUT</div>
-                <div className="cursor-pointer">BLOG</div>
-                <div className="cursor-pointer">ABOUT US</div>
-                <div className="cursor-pointer">BONUS PAGE</div>
+              <div className="flex items-center justify-between">
+                {/* Desktop Menu (Visible on 1280px and above) */}
+                <div className=" gap-6 items-center text-2xl hidden xl:flex">
+                  <Link
+                    href="/"
+                    className="cursor-pointer hover:text-primary transition-colors"
+                  >
+                    HOME
+                  </Link>
+                  <div className="cursor-pointer hover:text-primary transition-colors">
+                    LAYOUT
+                  </div>
+                  <div className="cursor-pointer hover:text-primary transition-colors">
+                    BLOG
+                  </div>
+                  <div className="cursor-pointer hover:text-primary transition-colors">
+                    ABOUT US
+                  </div>
+                  <div className="cursor-pointer hover:text-primary transition-colors">
+                    BONUS PAGE
+                  </div>
+                </div>
+
+                {/* Mobile Version (Visible below 1280px) */}
+                <div className="xl:hidden p-4 z-10">
+                  {/* Hamburger Icon */}
+                  <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="text-white"
+                  >
+                    {isOpen ? "❌" : <AlignJustify className="h-6 w-6" />}
+                  </button>
+
+                  {/* Mobile Menu */}
+                  <div
+                    className={`absolute left-0 w-full bg-slate-500 text-4xl transform transition-transform duration-300 ${
+                      isOpen ? "translate-y-0 " : "translate-y-full opacity-0"
+                    }`}
+                  >
+                    <nav className="flex flex-col gap-4">
+                      <Link
+                        href="/"
+                        className="text-white hover:text-primary transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Home
+                      </Link>
+                      <Link
+                        href="/layout"
+                        className="text-white hover:text-primary transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Layout
+                      </Link>
+                      <Link
+                        href="/blog"
+                        className="text-white hover:text-primary transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Blog
+                      </Link>
+                      <Link
+                        href="/about"
+                        className="text-white hover:text-primary transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        About Us
+                      </Link>
+                      <Link
+                        href="/bonus"
+                        className="text-white hover:text-primary transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Bonus Page
+                      </Link>
+                    </nav>
+                  </div>
+                </div>
               </div>
+
               <div className="flex  items-center gap-4">
                 <HeartIcon className="h-6 w-6 cursor-pointer" />
                 <ShoppingCartIcon className="h-6 w-6 cursor-pointer" />

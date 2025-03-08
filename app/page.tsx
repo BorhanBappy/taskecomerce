@@ -1,12 +1,13 @@
 // import ImageSlider from "@/components/BloagImages";
 import ImageSlider from "@/components/BloagImages";
 import BlurImage from "@/components/BlurImage";
-import ImagesSlide from "@/components/ImageSlider";
 
 import HomePage from "@/components/HomePage";
 import HomeProduct from "@/components/HomeProduct";
 import ShippingDelivery from "@/components/ShippingDelivery";
 import SingleImage from "@/components/SingleImage";
+import BrandSlider from "@/components/Brand";
+import ProductList from "@/components/DataFetch";
 
 export default function Home() {
   return (
@@ -15,9 +16,11 @@ export default function Home() {
       <ShippingDelivery />
       <BlurImage />
       {/* <DataFetch /> */}
-      <HomeProduct />
+      <ProductList />
+      {/* <HomeProduct /> */}
       <SingleImage />
       <ImageSlider />
+      <BrandSlider />
       {/* <ImagesSlide /> */}
     </div>
   );
