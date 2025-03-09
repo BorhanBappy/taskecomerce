@@ -233,7 +233,7 @@ const Footer = () => {
                 alt="Google Play"
                 width={160}
                 height={160}
-                className="h-auto w-full"
+                className="h-15 w-18"
               />
               <div className="absolute inset-0 left-[-100%] h-full w-full bg-[rgba(255,255,255,0.4)] opacity-0 transition-all duration-300 ease-in-out group-hover:left-0 group-hover:opacity-100"></div>
             </div>
@@ -245,7 +245,7 @@ const Footer = () => {
                 alt="App Store"
                 width={160}
                 height={160}
-                className="h-auto w-full"
+                className="h-15 w-18"
               />
               <div className="absolute inset-0 left-[-100%] h-full w-full bg-[rgba(255,255,255,0.4)] opacity-0 transition-all duration-300 ease-in-out group-hover:left-0 group-hover:opacity-100"></div>
             </div>

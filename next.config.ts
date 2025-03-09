@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
         hostname: "cdn11.bigcommerce.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "pub-c053b04a208d402dac06392a3df4fd32.r2.dev", // Add the new hostname here
+        pathname: "**",
+      },
     ],
   },
 };

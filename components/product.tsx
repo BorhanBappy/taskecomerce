@@ -1,59 +1,67 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import StarRating from "./Starrating";
 import { faHeart, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-
-interface Image {
-  public_id: string;
-  secure_url: string;
-  optimizeUrl: string;
-}
-
-interface Video {
-  public_id: string;
-  secure_url: string;
-}
 
 interface Category {
   _id: string;
   name: string;
 }
 
+interface ProductImage {
+  id: number;
+  name: string;
+}
+
+interface ProductVariation {
+  id: number;
+  product_id: number;
+  values: string;
+  price: number;
+  stock: number;
+}
+
 interface ProductType {
-  _id: string;
+  id: string;
   name: string;
   description: string;
   category: Category;
-  images: Image[];
-  video: Video;
-  status: boolean;
-  price: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  product_images: ProductImage[];
+  variation_combinations: ProductVariation[];
 }
 
 interface ProductProps {
   product: ProductType;
 }
 
-function Product({ product }: ProductProps) {
-  const images: string[] = [
-    "https://cdn11.bigcommerce.com/s-cslhb9s4uy/images/stencil/181x181/products/130/462/10__74481.1517125556.1280.1280__45292__71704.1522343849.jpg?c=2",
-  ];
-  product.images?.forEach((image) => {
-    images.push(image.secure_url);
-    images.push(image.optimizeUrl);
-  });
+const BASE_IMAGE_URL =
+  "https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/";
 
-  const [mainImage, setMainImage] = useState(images[0] || "");
+function Product({ product }: ProductProps) {
+  const images = useMemo(() => {
+    return (
+      product.product_images
+        ?.map((img) => `${BASE_IMAGE_URL}${img.name}`)
+        .slice(0, 5) || []
+    );
+  }, [product.product_images]);
+
+  const [mainImage, setMainImage] = useState(images[0] || "/placeholder.jpg");
+
+  const prices = useMemo(() => {
+    return product.variation_combinations.map((v) => v.price);
+  }, [product.variation_combinations]);
+
+  const lowestPrice = useMemo(() => Math.min(...prices), [prices]);
+  const highestPrice = useMemo(() => Math.max(...prices), [prices]);
 
   return (
     <Link
-      href={`/product/${product._id}`}
+      href={`/product/${product.id}`}
+      key={product.id}
       className="border-x-1 p-4 border-gray-300"
     >
       <div className="flex flex-col items-center cursor-pointer group relative overflow-hidden">
@@ -71,16 +79,18 @@ function Product({ product }: ProductProps) {
                   height={50}
                   width={50}
                   className="h-[50px] w-[50px] object-cover border hover:border-primary"
+                  loading="lazy"
                 />
               </div>
             ))}
           </div>
           <Image
             src={mainImage}
-            alt="Main Product"
+            alt={product.name}
             height={174}
             width={174}
-            className="w-[180px] h-[180px]"
+            className="w-[180px] h-[300px]"
+            loading="lazy"
           />
         </div>
         <div className="animation absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:top-1/3 group-hover:opacity-100 text-white flex items-center justify-center h-10 w-10 group rounded-full border bg-primary border-primary text-2xl">
@@ -89,7 +99,7 @@ function Product({ product }: ProductProps) {
         <h1 className="hover:text-primary">{product.name}</h1>
         <StarRating maxRating={5} color="gray" size={5} fillColor={5} />
         <h1 className="translate-y-[0%] group-hover:translate-y-[100%] animation opacity-100 group-hover:opacity-0">
-          ${product.price}
+          ${lowestPrice} - ${highestPrice}
         </h1>
         <div className="flex gap-2 absolute right-50% bottom-0 translate-y-[90%] group-hover:translate-y-[0%] animation opacity-0 group-hover:opacity-100">
           <button className="bg-primary text-white p-2 rounded-3xl">
@@ -107,4 +117,4 @@ function Product({ product }: ProductProps) {
   );
 }
 
-export default Product;
+export default React.memo(Product);
