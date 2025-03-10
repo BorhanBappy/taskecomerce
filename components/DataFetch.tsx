@@ -28,20 +28,20 @@ export default function ProductList() {
   }, []);
 
   // Collect unique categories using a Set
-  const categories = useMemo(() => {
-    const uniqueCategories = new Set<string>();
+  // const categories = useMemo(() => {
+  //   const uniqueCategories = new Set<string>();
 
-    products.forEach((product) => {
-      if (product.category && product.category.name) {
-        uniqueCategories.add(product.category.name);
-      }
-    });
+  //   products.forEach((product) => {
+  //     if (product.category && product.category.name) {
+  //       uniqueCategories.add(product.category.name);
+  //     }
+  //   });
 
-    return Array.from(uniqueCategories);
-  }, [products]);
+  //   return Array.from(uniqueCategories);
+  // }, [products]);
 
   // Log the unique categories
-  console.log("Unique Categories:", categories);
+  // console.log("Unique Categories:", categories);
 
   if (loading)
     return (
@@ -50,10 +50,11 @@ export default function ProductList() {
       </div>
     );
 
-  if (!products.length) return <p>No products available.</p>;
+  if (!products.length)
+    return <p className=" mx-auto">No products available.</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-2 gap-y-4 ">
+    <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-2 gap-y-4 ">
       {products.map((product) => (
         <Product key={product.id} product={product} />
       ))}

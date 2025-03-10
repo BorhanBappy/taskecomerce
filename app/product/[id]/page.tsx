@@ -135,11 +135,10 @@ const ProductDetails = () => {
       </div>
 
       <div className="mt-12">
-        <h2 className=" font-semibold mb-6 flex justify-center text-4xl text-blue-500">
+        <h2 className="font-semibold mb-6 flex justify-center text-4xl text-blue-500">
           Similar Products
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 gap-y-4 ">
-          {" "}
+        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 gap-y-4 ">
           {similerproducts.map((product, index) => (
             <Product key={product.id || index} product={product} />
           ))}

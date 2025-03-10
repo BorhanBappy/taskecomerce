@@ -14,11 +14,11 @@ const MobileMenu = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`absolute left-0 w-full bg-slate-500 text-4xl transform transition-transform duration-300 ${
+        className={`absolute left-0 md:left-1/2 mt-2  max-w-40 bg-slate-500 text-4xl transform transition-transform duration-300 ${
           isOpen ? "translate-y-0 " : "translate-y-full opacity-0"
         }`}
       >
-        <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col gap-4 justify-center items-center">
           <Link
             href="/"
             className="text-white hover:text-primary transition-colors"
