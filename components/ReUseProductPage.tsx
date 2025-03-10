@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import Product from "./product";
+import { ProductType } from "@/app/types/product"; // Import the ProductType interface
 
 interface ReUseProductPageProps {
   Categories: string[];
-  products: any[]; // Replace 'any' with the actual type of your products
+  products: ProductType[]; // Use ProductType instead of 'any'
   header: string;
   color: string;
 }
@@ -47,7 +48,7 @@ export default function ReUseProductPage({
       >
         {products.length > 0 ? (
           products.map((product) => (
-            <Product key={product._id} product={product} />
+            <Product key={product.id} product={product} />
           ))
         ) : (
           <div className="col-span-5 text-center text-gray-700">

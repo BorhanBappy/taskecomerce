@@ -1,4 +1,13 @@
-function Button({ toggleContact, isContactOpen }) {
+import React from "react";
+
+// Define the props interface
+interface ButtonProps {
+  toggleContact: () => void; // Function that takes no arguments and returns void
+  isContactOpen: boolean; // Boolean to track the open/close state
+}
+
+// Apply the interface to the component
+const Button: React.FC<ButtonProps> = ({ toggleContact, isContactOpen }) => {
   return (
     <button className="md:hidden focus:outline-none" onClick={toggleContact}>
       <svg
@@ -19,5 +28,6 @@ function Button({ toggleContact, isContactOpen }) {
       </svg>
     </button>
   );
-}
+};
+
 export default Button;

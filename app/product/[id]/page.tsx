@@ -108,33 +108,36 @@ const ProductDetails = () => {
     product.product_variation[0]?.variaton_values.split(",") || [];
 
   return (
-    <div className="container mx-auto p-6">
-      <Breadcrumb category={product.category} productName={product.name} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
-        <ProductImages images={images} />
-        <div>
-          <h1 className="text-3xl font-semibold">{product.name}</h1>
-          <h1>{product.code}</h1>
-          <ProductPrice
-            minPrice={minPrice}
-            maxPrice={maxPrice}
-            discountPrice={discountPrice}
-            price={price}
-            isCombination={isCombination}
-          />
-          <ProductVariations
-            variationValues={variationValues}
-            selectedVariation={selectedVariation}
-            onVariationClick={handleVariationClick}
-          />
-          <ProductActions selectedVariation={selectedVariation} />
-          <p className="text-gray-500 mt-2">{product.short_desc}</p>
+    <div>
+      <div className="container mx-auto p-6">
+        <Breadcrumb category={product.category} productName={product.name} />
+        <div className="grid grid-cols-1 md:grid-cols-2  justify-items-center">
+          <ProductImages images={images} />
+          <div>
+            <h1 className="text-3xl font-semibold">{product.name}</h1>
+            <h1>{product.code}</h1>
+            <ProductPrice
+              minPrice={minPrice}
+              maxPrice={maxPrice}
+              discountPrice={discountPrice}
+              price={price}
+              isCombination={isCombination}
+            />
+            <ProductVariations
+              variationValues={variationValues}
+              selectedVariation={selectedVariation}
+              onVariationClick={handleVariationClick}
+            />
+            <ProductActions selectedVariation={selectedVariation} />
+            <p className="text-gray-500 mt-2">{product.short_desc}</p>
+          </div>
         </div>
       </div>
 
-      {/* Display Similar Products */}
       <div className="mt-12">
-        <h2 className="text-2xl font-semibold mb-6">Similar Products</h2>
+        <h2 className=" font-semibold mb-6 flex justify-center text-4xl text-blue-500">
+          Similar Products
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 gap-y-4 ">
           {" "}
           {similerproducts.map((product, index) => (

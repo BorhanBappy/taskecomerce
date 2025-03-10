@@ -29,8 +29,8 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
             <Image
               src={image}
               alt={`Thumbnail ${index + 1}`}
-              width={60} // Decreased thumbnail width
-              height={60} // Decreased thumbnail height
+              width={100} // Decreased thumbnail width
+              height={100} // Decreased thumbnail height
               className="w-16 h-16 object-cover border rounded-md hover:border-orange-500"
               loading="lazy"
               onError={(e) => {

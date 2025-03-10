@@ -9,6 +9,7 @@ export async function fetchProducts(): Promise<ProductType[]> {
     const response = await axiosInstance.get("/public/products/get/15", {
       signal: controller.signal,
     });
+    console.log(response);
     return response.data.data.data || [];
   } catch (error) {
     console.error("Error fetching products:", error);

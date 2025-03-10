@@ -69,7 +69,7 @@ function Product({ product }: ProductProps) {
     <Link href={`/product/${product.id}`} key={product.id} className="w-full">
       <div className="flex flex-col items-center cursor-pointer group relative overflow-hidden">
         <div className="flex">
-          <div className="flex flex-col justify-center gap-2 mt-2 absolute transition-all duration-500 ease-in-out translate-x-[-1%] opacity-100 group-hover:translate-x-0 group-hover:opacity-100">
+          <div className="flex flex-col justify-center gap-2 mt-2 absolute transition-all duration-500 ease-in-out translate-x-[-0%] opacity-100 group-hover:translate-x-0 group-hover:opacity-100">
             {images.map((image, index) => (
               <div
                 key={index}
@@ -97,7 +97,7 @@ function Product({ product }: ProductProps) {
           />
           {/* Discount Badge */}
           {maxDiscount > 0 && (
-            <div className="absolute top-2 right-8 sm:right-0 lg:right-8 flex h-15 w-15 items-center justify-center rounded-full bg-red-300 z-10">
+            <div className=" absolute right-16 flex h-15 w-15 items-center justify-center rounded-full bg-red-300 ">
               <h1 className="text-xl text-blue-950 font-bold">
                 -{maxDiscount}%
               </h1>
@@ -109,7 +109,7 @@ function Product({ product }: ProductProps) {
         </div>
         <h1 className="hover:text-primary">{product.name}</h1>
         <StarRating maxRating={5} color="gray" size={5} fillColor={5} />
-        <h1>{product.category.name}</h1>
+        {/* <h1>{product.category.name}</h1> */}
         <h1 className="translate-y-[0%] group-hover:translate-y-[100%] animation opacity-100 group-hover:opacity-0">
           ${lowestPrice} - ${highestPrice}
         </h1>

@@ -14,7 +14,7 @@ const MiddleHeader = () => {
       />
 
       {/* Search Bar */}
-      <div className="flex items-center border-4 rounded-full w-[750px] p-2 max-w-md border-orange-600 bg-white shadow-md">
+      <div className="flex items-center border-4 rounded-full max-w-[500px] p-2 border-orange-600 bg-white shadow-md">
         <input
           type="text"
           placeholder="Search the store"
