@@ -9,6 +9,7 @@ import {
 
 // Define the type for each banner item
 interface Banner {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any; // FontAwesome icon can be of type `any`
   title: string;
   text: string;
@@ -44,7 +45,7 @@ const banners: Banner[] = [
 
 const BannerSection: React.FC = () => {
   return (
-    <div className="container mx-auto flex flex-wrap justify-between items-center gap-4 p-4 bg-gray-100">
+    <div className="container mx-auto hidden lg:flex flex-wrap justify-between items-center gap-4 p-4 bg-gray-100">
       {banners.map((banner, index) => (
         <div
           key={index}

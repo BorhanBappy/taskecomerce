@@ -57,14 +57,10 @@ function Product({ product }: ProductProps) {
   const highestPrice = useMemo(() => Math.max(...prices), [prices]);
 
   return (
-    <Link
-      href={`/product/${product.id}`}
-      key={product.id}
-      className="border-x-1 p-4 border-gray-300"
-    >
+    <Link href={`/product/${product.id}`} key={product.id} className="w-full">
       <div className="flex flex-col items-center cursor-pointer group relative overflow-hidden">
         <div className="flex">
-          <div className="flex flex-col justify-center gap-2 mt-2 absolute transition-all duration-500 ease-in-out translate-x-[-100%] opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+          <div className="flex flex-col justify-center gap-2 mt-2 absolute transition-all duration-500 ease-in-out translate-x-[-1%] opacity-100 group-hover:translate-x-0 group-hover:opacity-100">
             {images.map((image, index) => (
               <div
                 key={index}
@@ -87,20 +83,21 @@ function Product({ product }: ProductProps) {
             alt={product.name}
             height={300}
             width={300}
-            className="w-[180px] h-[300px]"
+            className="p-0 m-0 w-80"
             loading="lazy"
           />
         </div>
-        <div className="animation absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:top-1/3 group-hover:opacity-100 text-white flex items-center justify-center h-10 w-10 group rounded-full border bg-primary border-primary text-2xl">
+        <div className="animation absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 group-hover:top-1/3 group-hover:opacity-100 text-white flex items-center justify-center h-10 w-10 group rounded-full border bg-primary border-primary text-2xl">
           <FontAwesomeIcon icon={faSearch} />
         </div>
         <h1 className="hover:text-primary">{product.name}</h1>
         <StarRating maxRating={5} color="gray" size={5} fillColor={5} />
+        <h1>{product.category.name}</h1>
         <h1 className="translate-y-[0%] group-hover:translate-y-[100%] animation opacity-100 group-hover:opacity-0">
           ${lowestPrice} - ${highestPrice}
         </h1>
         <div className="flex gap-2 absolute right-50% bottom-0 translate-y-[90%] group-hover:translate-y-[0%] animation opacity-0 group-hover:opacity-100">
-          <button className="bg-primary text-white p-2 rounded-3xl">
+          <button className="bg-primary text-white p-2 rounded-3xl cursor-pointer">
             Add to Cart
           </button>
           <div className="flex items-center justify-center h-10 w-10 group rounded-full border border-primary hover:bg-orange-500 transition">

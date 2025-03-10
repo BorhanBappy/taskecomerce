@@ -7,8 +7,9 @@ import ProductImages from "@/components/SinglePageProduct/ProductImages ";
 import ProductVariations from "@/components/SinglePageProduct/ProductVariations ";
 import ProductPrice from "@/components/SinglePageProduct/ProductPrice ";
 import ProductActions from "@/components/SinglePageProduct/ProductActions";
-import { ProductType, fetchProducts } from "@/lib/products";
+import { fetchProducts } from "@/lib/products";
 import Product from "@/components/product";
+import { ProductType } from "@/app/types/product";
 const BASE_IMAGE_URL =
   "https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/";
 
@@ -72,7 +73,7 @@ const ProductDetails = () => {
 
       const products = await fetchProducts();
       const productDetail = products.find((p) => p.id === Number(id));
-
+      console.log(productDetail);
       if (productDetail) {
         setProduct(productDetail);
 
@@ -134,7 +135,8 @@ const ProductDetails = () => {
       {/* Display Similar Products */}
       <div className="mt-12">
         <h2 className="text-2xl font-semibold mb-6">Similar Products</h2>
-        <div className=" flex justify-center gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 gap-y-4 ">
+          {" "}
           {similerproducts.map((product, index) => (
             <Product key={product.id || index} product={product} />
           ))}

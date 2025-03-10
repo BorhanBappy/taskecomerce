@@ -1,37 +1,21 @@
-import axiosInstance from "@/lib/api";
-
-export interface ProductType {
-  id: number;
-  name: string;
-  short_desc: string;
-  category: {
-    _id: string;
-    name: string;
-  };
-  product_images: {
-    id: number;
-    name: string;
-  }[];
-  variation_combinations: {
-    id: number;
-    price: number;
-    discount: number;
-    discount_date: string;
-    values: string;
-  }[];
-  product_variation: {
-    id: number;
-    variaton_values: string;
-  }[];
-}
+import axiosInstance from "./api";
+import { ProductType } from "@/app/types/product";
 
 export async function fetchProducts(): Promise<ProductType[]> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000); // Abort if request takes too long
+
   try {
-    const response = await axiosInstance.get("/public/products/get/15");
-    console.log(response);
+    const response = await axiosInstance.get("/public/products/get/15", {
+      signal: controller.signal,
+    });
     return response.data.data.data || [];
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
+  } finally {
+    clearTimeout(timeout);
   }
 }
+
+console.log(fetchProducts());
