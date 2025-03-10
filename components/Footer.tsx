@@ -66,13 +66,15 @@ const Footer = () => {
     <footer className="">
       {/* Newsletter Section */}
       <div className="bg-[#f0f0f0]">
-        <div className="container mx-auto flex py-[30px] gap-4 items-center">
-          <h1 className="text-2xl uppercase px-8">Sign up for newsletter</h1>
-          <div className="flex">
+        <div className="container mx-auto flex flex-col md:flex-row py-[30px] gap-4 items-center">
+          <h1 className="text-sm sm:text-xl md:text-2xl uppercase px-8">
+            Sign up for newsletter
+          </h1>
+          <div className="flex p-2">
             <input
               type="email"
               placeholder="Your email address"
-              className="w-[500px] rounded-l-full border border-primary py-3 placeholder:text-center text-center focus:outline-primary"
+              className="w-[200px] md:w-[400px] lg:w-[500px] rounded-l-full border border-primary py-3 placeholder:text-center text-center focus:outline-primary"
             />
             <button className="rounded-r-full bg-primary text-white py-[13px] px-4">
               SUBSCRIBE

@@ -6,31 +6,29 @@ import { faHeart, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
-interface Category {
-  _id: string;
-  name: string;
-}
-
-interface ProductImage {
-  id: number;
-  name: string;
-}
-
-interface ProductVariation {
-  id: number;
-  product_id: number;
-  values: string;
-  price: number;
-  stock: number;
-}
-
 interface ProductType {
-  id: string;
+  id: number;
   name: string;
-  description: string;
-  category: Category;
-  product_images: ProductImage[];
-  variation_combinations: ProductVariation[];
+  short_desc: string;
+  category: {
+    _id: string;
+    name: string;
+  };
+  product_images: {
+    id: number;
+    name: string;
+  }[];
+  variation_combinations: {
+    id: number;
+    price: number;
+    discount: number;
+    discount_date: string;
+    values: string;
+  }[];
+  product_variation: {
+    id: number;
+    variaton_values: string;
+  }[];
 }
 
 interface ProductProps {
@@ -87,8 +85,8 @@ function Product({ product }: ProductProps) {
           <Image
             src={mainImage}
             alt={product.name}
-            height={174}
-            width={174}
+            height={300}
+            width={300}
             className="w-[180px] h-[300px]"
             loading="lazy"
           />

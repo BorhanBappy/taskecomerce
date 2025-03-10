@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     // You can modify the request config here (e.g., add headers, tokens, etc.)
-    console.log("Request Interceptor:", config);
+    // console.log("Request Interceptor:", config);
     return config;
   },
   (error) => {
@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => {
     // You can modify the response data here
-    console.log("Response Interceptor:", response);
+    // console.log("Response Interceptor:", response);
     return response;
   },
   (error) => {

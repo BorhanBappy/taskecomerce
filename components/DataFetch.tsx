@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from "react";
-import axiosInstance from "../lib/api"; // Adjust path as needed
+// import axiosInstance from "../lib/api"; // Adjust path as needed
 import Product from "./product";
+import { fetchProducts } from "@/lib/products";
+import Loading from "./Loading";
 
 // Fetch products from API
-export async function fetchProducts() {
-  try {
-    const response = await axiosInstance.get("/public/products/get/15");
-    return response.data.data.data || [];
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
-}
+// export async function fetchProducts() {
+//   try {
+//     const response = await axiosInstance.get("/public/products/get/15");
+//     return response.data.data.data || [];
+//   } catch (error) {
+//     console.error("Error fetching products:", error);
+//     return [];
+//   }
+// }
 
 export default function ProductList() {
   const [products, setProducts] = useState<any[]>([]);
@@ -30,7 +32,12 @@ export default function ProductList() {
     getProducts();
   }, []);
 
-  if (loading) return <p>Loading products...</p>;
+  if (loading)
+    return (
+      <div className="mx-auto">
+        <Loading />
+      </div>
+    );
   if (!products.length) return <p>No products available.</p>;
 
   return (
