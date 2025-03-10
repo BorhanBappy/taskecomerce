@@ -5,8 +5,23 @@ import CategoriesDropdown from "./CategoriesDropdown";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import { HeartIcon, ShoppingCartIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [header, setHeader] = useState(false);
+  const scrollHeader = () => {
+    if (window.scrollY >= 20) {
+      setHeader(true);
+    } else {
+      setHeader(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", scrollHeader);
+    return () => {
+      window.addEventListener("scroll", scrollHeader);
+    };
+  }, []);
   return (
     <header>
       {/* Top Bar */}
@@ -16,7 +31,7 @@ const Header = () => {
       <MiddleHeader />
 
       {/* Categories */}
-      <div className="bg-gray-300 shadow">
+      <nav className={header ? `bg-gray-300 shadow` : "bg-[transparent] "}>
         <div className="bg-white container mx-auto">
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
             <CategoriesDropdown />
@@ -36,7 +51,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     </header>
   );
 };
