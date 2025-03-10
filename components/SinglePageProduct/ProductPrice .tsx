@@ -23,6 +23,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({
       <p className="text-green-600 text-lg font-semibold mt-2">
         Maximum Discount: {formatPrice(discountPrice)}
       </p>
+      <p>{}</p>
       {isCombination && (
         <div className="mt-4">
           <p className="text-lg font-semibold">

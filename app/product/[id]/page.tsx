@@ -10,8 +10,7 @@ import ProductActions from "@/components/SinglePageProduct/ProductActions";
 import { fetchProducts } from "@/lib/products";
 import Product from "@/components/product";
 import { ProductType } from "@/app/types/product";
-const BASE_IMAGE_URL =
-  "https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/";
+const BASE_IMAGE_URL = process.env.NEXT_PUBLIC_BASE_IMAGE_URL;
 
 // Define isDiscountValid function
 const isDiscountValid = (discountDate: string): boolean => {
@@ -111,10 +110,11 @@ const ProductDetails = () => {
   return (
     <div className="container mx-auto p-6">
       <Breadcrumb category={product.category} productName={product.name} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
         <ProductImages images={images} />
         <div>
           <h1 className="text-3xl font-semibold">{product.name}</h1>
+          <h1>{product.code}</h1>
           <ProductPrice
             minPrice={minPrice}
             maxPrice={maxPrice}

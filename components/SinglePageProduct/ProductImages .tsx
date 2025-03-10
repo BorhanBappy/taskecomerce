@@ -13,8 +13,8 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
       <Image
         src={mainImage}
         alt="Main Product Image"
-        width={500}
-        height={500}
+        width={350} // Decreased main image width
+        height={350} // Decreased main image height
         className="w-auto h-auto object-cover"
         priority
         onError={() => setMainImage("/placeholder.jpg")}
@@ -29,9 +29,9 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
             <Image
               src={image}
               alt={`Thumbnail ${index + 1}`}
-              width={80}
-              height={80}
-              className="w-20 h-20 object-cover border rounded-md hover:border-orange-500"
+              width={60} // Decreased thumbnail width
+              height={60} // Decreased thumbnail height
+              className="w-16 h-16 object-cover border rounded-md hover:border-orange-500"
               loading="lazy"
               onError={(e) => {
                 e.currentTarget.src = "/placeholder.jpg";

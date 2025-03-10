@@ -15,7 +15,7 @@ export default function ProductList() {
     async function getProducts() {
       try {
         const data = await fetchProducts();
-        setProducts(data);
+        setProducts(data.slice(0, 30));
 
         // Log the fetched data to verify its structure
         // console.log("Fetched Products:", JSON.stringify(data, null, 2));

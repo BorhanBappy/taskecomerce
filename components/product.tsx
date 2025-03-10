@@ -10,6 +10,7 @@ interface ProductType {
   id: number;
   name: string;
   short_desc: string;
+  discount_percent: string | number;
   category: {
     _id: string;
     name: string;
@@ -24,6 +25,7 @@ interface ProductType {
     discount: number;
     discount_date: string;
     values: string;
+    discount_percent: number;
   }[];
   product_variation: {
     id: number;
@@ -35,8 +37,7 @@ interface ProductProps {
   product: ProductType;
 }
 
-const BASE_IMAGE_URL =
-  "https://pub-c053b04a208d402dac06392a3df4fd32.r2.dev/15/image/";
+const BASE_IMAGE_URL = process.env.NEXT_PUBLIC_BASE_IMAGE_URL;
 
 function Product({ product }: ProductProps) {
   const images = useMemo(() => {
@@ -55,6 +56,14 @@ function Product({ product }: ProductProps) {
 
   const lowestPrice = useMemo(() => Math.min(...prices), [prices]);
   const highestPrice = useMemo(() => Math.max(...prices), [prices]);
+
+  // Get the maximum discount from variation_combinations
+  const maxDiscount = useMemo(() => {
+    return Math.max(
+      ...product.variation_combinations.map((v) => v.discount_percent),
+      0
+    );
+  }, [product.variation_combinations]);
 
   return (
     <Link href={`/product/${product.id}`} key={product.id} className="w-full">
@@ -86,6 +95,14 @@ function Product({ product }: ProductProps) {
             className="p-0 m-0 w-80"
             loading="lazy"
           />
+          {/* Discount Badge */}
+          {maxDiscount > 0 && (
+            <div className="absolute top-2 right-8 sm:right-0 lg:right-8 flex h-15 w-15 items-center justify-center rounded-full bg-red-300 z-10">
+              <h1 className="text-xl text-blue-950 font-bold">
+                -{maxDiscount}%
+              </h1>
+            </div>
+          )}
         </div>
         <div className="animation absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 group-hover:top-1/3 group-hover:opacity-100 text-white flex items-center justify-center h-10 w-10 group rounded-full border bg-primary border-primary text-2xl">
           <FontAwesomeIcon icon={faSearch} />
