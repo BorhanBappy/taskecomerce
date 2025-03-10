@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = "https://admin.ezicalc.com/api/";
 
 // console.log("API URL:", API_URL); // Debugging
 console.log(process.env.NEXT_PUBLIC_API_URL);
 const axiosInstance = axios.create({
-  baseURL,
+  baseURL: API_URL,
 });
 
 // Request interceptor
