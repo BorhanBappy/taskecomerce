@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import Product from "./product";
 import { fetchProducts } from "@/lib/products";
 import Loading from "./Loading";

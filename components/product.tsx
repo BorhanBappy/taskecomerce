@@ -68,6 +68,12 @@ function Product({ product }: ProductProps) {
   return (
     <Link href={`/product/${product.id}`} key={product.id} className="w-full">
       <div className="flex flex-col items-center cursor-pointer group relative overflow-hidden">
+        {/* Discount Badge */}
+        {maxDiscount > 0 && (
+          <div className=" absolute right-8 sm:right-2 flex h-15 w-15 items-center justify-center rounded-full bg-red-300 ">
+            <h1 className="text-xl text-blue-950 font-bold">-{maxDiscount}%</h1>
+          </div>
+        )}
         <div className="flex">
           <div className="flex flex-col justify-center gap-2 mt-2 absolute transition-all duration-500 ease-in-out translate-x-[-0%] opacity-100 group-hover:translate-x-0 group-hover:opacity-100">
             {images.map((image, index) => (
@@ -95,14 +101,6 @@ function Product({ product }: ProductProps) {
             className="p-0 m-0 w-80"
             loading="lazy"
           />
-          {/* Discount Badge */}
-          {maxDiscount > 0 && (
-            <div className=" absolute right-16 flex h-15 w-15 items-center justify-center rounded-full bg-red-300 ">
-              <h1 className="text-xl text-blue-950 font-bold">
-                -{maxDiscount}%
-              </h1>
-            </div>
-          )}
         </div>
         <div className="animation absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 group-hover:top-1/3 group-hover:opacity-100 text-white flex items-center justify-center h-10 w-10 group rounded-full border bg-primary border-primary text-2xl">
           <FontAwesomeIcon icon={faSearch} />
