@@ -4,6 +4,8 @@ import "./globals.css";
 // import Header from "@/components/Header"; // Adjust path if needed
 import Footer from "@/components/Footer";
 import Header from "@/components/Header/Header";
+import { CartProvider } from "@/app/context/CartContext";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,14 +19,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className}antialiased`}>
-        {/* <Header /> */}
-        <Header />
-        {children}
+    <CartProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${inter.className}antialiased`}
+          suppressHydrationWarning
+        >
+          {/* <Header /> */}
 
-        <Footer />
-      </body>
-    </html>
+          <Header />
+          {children}
+
+          <Footer />
+        </body>
+      </html>
+    </CartProvider>
   );
 }

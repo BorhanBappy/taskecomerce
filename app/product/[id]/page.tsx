@@ -128,7 +128,14 @@ const ProductDetails = () => {
               selectedVariation={selectedVariation}
               onVariationClick={handleVariationClick}
             />
-            <ProductActions selectedVariation={selectedVariation} />
+            <ProductActions
+              selectedVariation={selectedVariation}
+              product={{
+                id: product.id,
+                name: product.name,
+                price: price, // Use the selected price
+              }}
+            />{" "}
             <p className="text-gray-500 mt-2">{product.short_desc}</p>
           </div>
         </div>

@@ -1,30 +1,46 @@
+// ProductActions.tsx
+"use client";
+
 import { ShoppingCartIcon } from "lucide-react";
-import { useState, useEffect } from "react"; // Import useEffect
+import { useState, useEffect } from "react";
+import { useCart } from "@/app/context/CartContext";
 
 interface ProductActionsProps {
   selectedVariation: string | null;
+  product: {
+    id: number;
+    name: string;
+    price: number;
+  };
 }
 
 const ProductActions: React.FC<ProductActionsProps> = ({
   selectedVariation,
+  product,
 }) => {
   const [cartProduct, setCartProduct] = useState(1);
   const [message, setMessage] = useState("");
+  const { addToCart } = useCart();
 
-  // Clear the error message when a variation is selected
   useEffect(() => {
     if (selectedVariation !== null) {
       setMessage("");
     }
-  }, [selectedVariation]); // Watch for changes in selectedVariation
+  }, [selectedVariation]);
 
   const handleAddToCart = () => {
     if (selectedVariation === null) {
       setMessage("Please select a variation.");
     } else {
-      setMessage(""); // Clear any previous message
+      setMessage("");
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: cartProduct,
+        variation: selectedVariation,
+      });
       alert(`Added ${cartProduct} product(s) to the cart!`);
-      // Here, you can add logic to update the cart state or make an API call
     }
   };
 
@@ -32,18 +48,16 @@ const ProductActions: React.FC<ProductActionsProps> = ({
     if (selectedVariation === null) {
       setMessage("Please select a variation.");
     } else {
-      setMessage(""); // Clear any previous message
+      setMessage("");
       alert(`Proceeding to buy ${cartProduct} product(s)!`);
-      // Here, you can add logic to redirect to the checkout page or make an API call
     }
   };
 
   return (
     <div className="flex flex-col gap-4 mt-6">
-      {/* Quantity Control */}
       <div className="flex gap-4 items-center">
         <button
-          onClick={() => setCartProduct((prev) => Math.max(prev - 1, 1))} // Prevent quantity from going below 1
+          onClick={() => setCartProduct((prev) => Math.max(prev - 1, 1))}
           className="px-3 py-2 border rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
           aria-label="Decrease quantity"
         >
@@ -58,7 +72,6 @@ const ProductActions: React.FC<ProductActionsProps> = ({
           +
         </button>
 
-        {/* Add to Cart Button */}
         <button
           className={`px-6 py-3 rounded-md flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
             selectedVariation
@@ -73,14 +86,12 @@ const ProductActions: React.FC<ProductActionsProps> = ({
         </button>
       </div>
 
-      {/* Error Message */}
       {message && (
         <p className="text-red-500 text-sm mt-2" role="alert">
           {message}
         </p>
       )}
 
-      {/* Buy Now Button */}
       <button
         className={`border border-orange-500 text-orange-500 px-6 py-3 rounded-md hover:bg-orange-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 ${
           !selectedVariation && "opacity-50 cursor-not-allowed"
