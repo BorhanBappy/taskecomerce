@@ -138,7 +138,8 @@ const ProductDetails = () => {
               product={{
                 id: product.id,
                 name: product.name,
-                price: price,
+                price: price, // Base price
+                discountPrice: discountPrice, // Discounted price
                 image: `${BASE_IMAGE_URL}${product.product_images?.[0]?.name}`,
               }}
             />

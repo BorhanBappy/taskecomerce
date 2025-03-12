@@ -11,6 +11,7 @@ interface ProductActionsProps {
     id: number;
     name: string;
     price: number;
+    discountPrice: number; // Add this line
     image: string;
   };
 }
@@ -34,7 +35,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({
   const createCartItem = () => ({
     id: product.id,
     name: product.name,
-    price: product.price,
+    price: product.price - product.discountPrice, // Use discountPrice if available, otherwise fallback to base price
     quantity: cartProduct,
     variation: selectedVariation as string, // Safe to cast since we validate selectedVariation
     image: product.image,
