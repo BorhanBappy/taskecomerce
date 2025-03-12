@@ -45,24 +45,28 @@ const banners: Banner[] = [
 
 const BannerSection: React.FC = () => {
   return (
-    <div className="container mx-auto hidden lg:flex flex-wrap justify-between items-center gap-4 p-4 bg-gray-100">
-      {banners.map((banner, index) => (
-        <div
-          key={index}
-          className="flex items-center space-x-3 bg-white p-4 rounded-lg shadow-md w-full sm:w-auto"
-        >
-          <div className="text-blue-500 text-3xl">
-            <FontAwesomeIcon
-              icon={banner.icon}
-              className="text-orange-500 h-12 w-12"
-            />
+    <div className=" bg-gray-100">
+      <div className="container mx-auto hidden lg:flex flex-wrap justify-between items-center gap-4 p-4">
+        {banners.map((banner, index) => (
+          <div
+            key={index}
+            className="flex items-center space-x-3 bg-white p-4 rounded-lg shadow-md w-full sm:w-auto"
+          >
+            <div className="text-blue-500 text-3xl">
+              <FontAwesomeIcon
+                icon={banner.icon}
+                className="text-orange-500 h-12 w-12"
+              />
+            </div>
+            <div>
+              <h5 className="text-lg font-semibold capitalize">
+                {banner.title}
+              </h5>
+              <p className="text-gray-600">{banner.text}</p>
+            </div>
           </div>
-          <div>
-            <h5 className="text-lg font-semibold capitalize">{banner.title}</h5>
-            <p className="text-gray-600">{banner.text}</p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

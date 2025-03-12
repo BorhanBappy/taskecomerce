@@ -10,6 +10,7 @@ import ProductActions from "@/components/SinglePageProduct/ProductActions";
 import { fetchProducts } from "@/lib/products";
 import Product from "@/components/product";
 import { ProductType } from "@/app/types/product";
+import Loading from "@/components/Loading";
 const BASE_IMAGE_URL = process.env.NEXT_PUBLIC_BASE_IMAGE_URL;
 
 // Define isDiscountValid function
@@ -92,7 +93,11 @@ const ProductDetails = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className=" min-h-100">
+        <Loading />
+      </div>
+    );
   }
 
   if (!product) {
@@ -133,9 +138,10 @@ const ProductDetails = () => {
               product={{
                 id: product.id,
                 name: product.name,
-                price: price, // Use the selected price
+                price: price,
+                image: `${BASE_IMAGE_URL}${product.product_images?.[0]?.name}`,
               }}
-            />{" "}
+            />
             <p className="text-gray-500 mt-2">{product.short_desc}</p>
           </div>
         </div>

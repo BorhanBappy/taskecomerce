@@ -102,7 +102,7 @@ function Product({ product }: ProductProps) {
             loading="lazy"
           />
         </div>
-        <div className="animation absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 group-hover:top-1/3 group-hover:opacity-100 text-white flex items-center justify-center h-10 w-10 group rounded-full border bg-primary border-primary text-2xl">
+        <div className="animation absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:top-1/3 group-hover:opacity-100 text-white flex items-center justify-center h-10 w-10 group rounded-full border bg-primary border-primary text-2xl">
           <FontAwesomeIcon icon={faSearch} />
         </div>
         <h1 className="hover:text-primary">{product.name}</h1>

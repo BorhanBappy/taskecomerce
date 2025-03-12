@@ -1,101 +1,99 @@
-// CartContext.tsx
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
+// Define the structure of the cart item
 interface CartItem {
   id: number;
   name: string;
   price: number;
   quantity: number;
-  variation: string | null;
+  variation: string;
+  image: string;
 }
 
+// Define the CartContextType
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: CartItem) => void;
-  removeFromCart: (productId: number, variation: string | null) => void;
-  updateQuantity: (
-    productId: number,
-    variation: string | null,
-    quantity: number
-  ) => void;
+  tempCart: CartItem[];
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (id: number, variation: string) => void;
+  updateQuantity: (id: number, variation: string, quantity: number) => void;
+  setSelectedItems: (items: CartItem[]) => void;
+  clearTempCart: () => void; // Add this line
 }
 
+// Create a default empty context
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+// Provider component
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  // Load cart items from localStorage on initial render
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    if (typeof window !== "undefined") {
-      const savedCart = localStorage.getItem("cart");
-      return savedCart ? JSON.parse(savedCart) : [];
-    }
-    return [];
-  });
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [tempCart, setTempCart] = useState<CartItem[]>([]);
 
-  // Save cart items to localStorage whenever they change
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-    }
-  }, [cartItems]);
-
-  const addToCart = (product: CartItem) => {
+  // Add item to cart
+  const addToCart = (item: CartItem) => {
     setCartItems((prev) => {
       const existingItem = prev.find(
-        (item) => item.id === product.id && item.variation === product.variation
+        (cartItem) =>
+          cartItem.id === item.id && cartItem.variation === item.variation
       );
 
       if (existingItem) {
-        return prev.map((item) =>
-          item.id === product.id && item.variation === product.variation
-            ? { ...item, quantity: item.quantity + product.quantity }
-            : item
+        return prev.map((cartItem) =>
+          cartItem.id === item.id && cartItem.variation === item.variation
+            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+            : cartItem
         );
       } else {
-        return [...prev, product];
+        return [...prev, item];
       }
     });
   };
 
-  const removeFromCart = (productId: number, variation: string | null) => {
+  // Remove item from cart
+  const removeFromCart = (id: number, variation: string) => {
     setCartItems((prev) =>
-      prev.filter(
-        (item) => !(item.id === productId && item.variation === variation)
-      )
+      prev.filter((item) => !(item.id === id && item.variation === variation))
     );
   };
 
-  const updateQuantity = (
-    productId: number,
-    variation: string | null,
-    quantity: number
-  ) => {
+  // Update item quantity
+  const updateQuantity = (id: number, variation: string, quantity: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
-        item.id === productId && item.variation === variation
+        item.id === id && item.variation === variation
           ? { ...item, quantity }
           : item
       )
     );
   };
 
+  // Store selected items for order page
+  const setSelectedItems = (items: CartItem[]) => {
+    setTempCart(items);
+  };
+  const clearTempCart = () => {
+    setTempCart([]);
+  };
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, updateQuantity }}
+      value={{
+        cartItems,
+        tempCart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        setSelectedItems,
+        clearTempCart,
+      }}
     >
       {children}
     </CartContext.Provider>
   );
 };
 
+// Custom hook to use the cart context
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {

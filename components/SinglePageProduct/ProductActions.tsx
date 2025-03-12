@@ -1,9 +1,9 @@
-// ProductActions.tsx
 "use client";
 
 import { ShoppingCartIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "@/app/context/CartContext";
+import { useRouter } from "next/navigation";
 
 interface ProductActionsProps {
   selectedVariation: string | null;
@@ -11,6 +11,7 @@ interface ProductActionsProps {
     id: number;
     name: string;
     price: number;
+    image: string;
   };
 }
 
@@ -20,7 +21,8 @@ const ProductActions: React.FC<ProductActionsProps> = ({
 }) => {
   const [cartProduct, setCartProduct] = useState(1);
   const [message, setMessage] = useState("");
-  const { addToCart } = useCart();
+  const { addToCart, setTempCart } = useCart(); // Add setTempCart from CartContext
+  const router = useRouter();
 
   useEffect(() => {
     if (selectedVariation !== null) {
@@ -33,12 +35,14 @@ const ProductActions: React.FC<ProductActionsProps> = ({
       setMessage("Please select a variation.");
     } else {
       setMessage("");
+
       addToCart({
         id: product.id,
         name: product.name,
         price: product.price,
         quantity: cartProduct,
         variation: selectedVariation,
+        image: product.image,
       });
       alert(`Added ${cartProduct} product(s) to the cart!`);
     }
@@ -49,7 +53,21 @@ const ProductActions: React.FC<ProductActionsProps> = ({
       setMessage("Please select a variation.");
     } else {
       setMessage("");
-      alert(`Proceeding to buy ${cartProduct} product(s)!`);
+
+      // Set the temporary cart for "Buy Now"
+      setTempCart([
+        {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: cartProduct,
+          variation: selectedVariation,
+          image: product.image,
+        },
+      ]);
+
+      // Redirect to the OrderPage
+      router.push("/order");
     }
   };
 

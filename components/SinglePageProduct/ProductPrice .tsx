@@ -15,35 +15,37 @@ const ProductPrice: React.FC<ProductPriceProps> = ({
   price,
   isCombination,
 }) => {
+  // Calculate discounted price if applicable
+  const discountedPrice = discountPrice > 0 ? price - discountPrice : null;
+
   return (
     <div>
-      <p className="text-orange-500 text-2xl font-bold mt-4">
-        {formatPrice(minPrice)} - {formatPrice(maxPrice)}
-      </p>
-      <p className="text-green-600 text-lg font-semibold mt-2">
-        Maximum Discount: {formatPrice(discountPrice)}
-      </p>
-      <p>{}</p>
+      {/* Display min and max price if not a combination */}
+      {!isCombination && (
+        <p className="text-orange-500 text-2xl font-bold mt-4">
+          {formatPrice(minPrice)} - {formatPrice(maxPrice)}
+        </p>
+      )}
+
+      {/* Display combination-specific pricing */}
       {isCombination && (
         <div className="mt-4">
-          <p className="text-lg font-semibold">
-            Discounted Price:{" "}
-            {formatPrice(discountPrice > 0 ? price - discountPrice : 0)}
+          {/* Display discounted price or regular price */}
+          <p className="text-orange-500 text-2xl font-bold mt-4">
+            Price:{" "}
+            {discountedPrice
+              ? formatPrice(discountedPrice)
+              : formatPrice(price)}
           </p>
-          {discountPrice > 0 ? (
+
+          {/* Display original price with strikethrough if discounted */}
+          {discountedPrice && (
             <p
-              className="text-lg font-semibold line-through"
+              className="text-lg font-semibold text-gray-400 line-through"
               style={{ textDecorationColor: "red" }}
             >
-              Selected Base Price: {formatPrice(price)}
+              {formatPrice(price)}
             </p>
-          ) : (
-            <p className="text-lg font-semibold">
-              Selected Base Price: {formatPrice(price)}
-            </p>
-          )}
-          {discountPrice === 0 && (
-            <p className="text-red-500 text-sm mt-2">Discount has expired.</p>
           )}
         </div>
       )}
