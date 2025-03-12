@@ -3,18 +3,18 @@ import { SearchIcon, HeadphonesIcon } from "lucide-react";
 
 const MiddleHeader = () => {
   return (
-    <div className="container mx-auto flex flex-col md:flex-row items-center justify-between p-8">
+    <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 p-8">
       {/* Logo */}
       <Image
         src="/image/logo_1521851058__88672.webp"
         alt="icon"
         height={100}
         width={100}
-        className="h-16 w-28"
+        className="h-16 w-full object-contain md:w-16"
       />
 
-      {/* Search Bar */}
-      <div className="flex items-center border-4 rounded-full max-w-[500px] p-2 border-orange-600 bg-white shadow-md">
+      {/* Search Bar - Full Width */}
+      <div className="flex items-center border-4 rounded-full p-2 border-orange-600 bg-white shadow-md flex-grow max-w-2xl w-full">
         <input
           type="text"
           placeholder="Search the store"
@@ -26,11 +26,11 @@ const MiddleHeader = () => {
       </div>
 
       {/* Contact Info */}
-      <div className="flex items-center space-x-4 p-4">
+      <div className="flex items-center space-x-4">
         <HeadphonesIcon className="h-16 w-16 text-primary" />
         <div>
-          <h3>Call Us: 0000000</h3>
-          <h3>Email: bbhjdj@gmail.com</h3>
+          <h3 className="text-lg font-semibold">Call Us: 0000000</h3>
+          <h3 className="text-sm text-gray-600">Email: bbhjdj@gmail.com</h3>
         </div>
       </div>
     </div>

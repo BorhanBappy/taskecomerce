@@ -84,8 +84,8 @@ const Footer = () => {
       </div>
 
       {/* Footer Columns */}
-      <div className="container mx-auto flex flex-col md:flex-row p-8 md:gap-6 lg:gap-16 justify-center">
-        <div className="flex flex-col md:flex-row md:gap-6 lg:gap-16 justify-between p-2">
+      <div className="container mx-auto gap-2 flex flex-col md:flex-row p-8 md:gap-6 lg:gap-16 justify-center">
+        <div className="flex flex-col gap-2 md:flex-row md:gap-6 lg:gap-16 justify-between ">
           {/* All Categories */}
           <div>
             <div className="flex items-center gap-2">
@@ -215,21 +215,24 @@ const Footer = () => {
               Email: contact@revo.com
             </li>
           </ul>
-          <div className="flex flex-wrap items-center gap-4 p-4">
+          <div className="flex flex-wrap  items-center gap-4 p-4">
             {/* QR Code Image */}
-            <div className="group relative h-auto w-14 overflow-hidden">
+            <div className="group relative w-14 h-14 overflow-hidden">
+              {/* Image */}
               <Image
                 src="https://cdn11.bigcommerce.com/s-cslhb9s4uy/content/site/app/app-qrcode.png"
                 alt="QR Code"
                 width={160}
                 height={160}
-                className="h-15 w-14"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 left-[-100%] h-full w-full bg-[rgba(255,255,255,0.4)] opacity-0 transition-all duration-300 ease-in-out group-hover:left-0 group-hover:opacity-100"></div>
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-[rgba(255,255,255,0.4)] opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"></div>
             </div>
 
             {/* Google Play Image */}
-            <div className="group relative h-auto w-40 overflow-hidden">
+            <div className="group relative h-auto w-20 overflow-hidden">
               <Image
                 src="https://cdn11.bigcommerce.com/s-cslhb9s4uy/content/site/app/google-play.png"
                 alt="Google Play"
@@ -237,11 +240,11 @@ const Footer = () => {
                 height={160}
                 className="h-15 w-18"
               />
-              <div className="absolute inset-0 left-[-100%] h-full w-full bg-[rgba(255,255,255,0.4)] opacity-0 transition-all duration-300 ease-in-out group-hover:left-0 group-hover:opacity-100"></div>
+              <div className="absolute inset-0 left-[-100%] h-15 w-18 bg-[rgba(255,255,255,0.4)] opacity-0 transition-all duration-300 ease-in-out group-hover:left-0 group-hover:opacity-100"></div>
             </div>
 
             {/* App Store Image */}
-            <div className="group relative h-auto w-40 overflow-hidden">
+            <div className="group relative h-auto w-20 overflow-hidden">
               <Image
                 src="https://cdn11.bigcommerce.com/s-cslhb9s4uy/content/site/app/app-store.png"
                 alt="App Store"
@@ -249,7 +252,7 @@ const Footer = () => {
                 height={160}
                 className="h-15 w-18"
               />
-              <div className="absolute inset-0 left-[-100%] h-full w-full bg-[rgba(255,255,255,0.4)] opacity-0 transition-all duration-300 ease-in-out group-hover:left-0 group-hover:opacity-100"></div>
+              <div className="absolute inset-0 left-[-100%] h-15 w-18 bg-[rgba(255,255,255,0.4)] opacity-0 transition-all duration-300 ease-in-out group-hover:left-0 group-hover:opacity-100"></div>
             </div>
           </div>
         </div>

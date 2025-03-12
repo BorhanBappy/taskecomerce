@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 // Define the structure of the cart item
 interface CartItem {
@@ -19,8 +25,9 @@ interface CartContextType {
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number, variation: string) => void;
   updateQuantity: (id: number, variation: string, quantity: number) => void;
-  setSelectedItems: (items: CartItem[]) => void;
-  clearTempCart: () => void; // Add this line
+  setTempCart: (items: CartItem[]) => void;
+  clearTempCart: () => void;
+  setCartItems: (items: CartItem[]) => void; // Add this line
 }
 
 // Create a default empty context
@@ -28,8 +35,21 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 // Provider component
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [tempCart, setTempCart] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]); // Initialize with an empty array
+  const [tempCartState, setTempCartState] = useState<CartItem[]>([]);
+
+  // Load cart items from localStorage after the component mounts
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cartItems");
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart));
+    }
+  }, []); // Empty dependency array ensures this runs only once after mount
+
+  // Save cart items to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   // Add item to cart
   const addToCart = (item: CartItem) => {
@@ -70,22 +90,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Store selected items for order page
-  const setSelectedItems = (items: CartItem[]) => {
-    setTempCart(items);
+  const setTempCart = (items: CartItem[]) => {
+    setTempCartState(items);
   };
+
+  // Clear the tempCart
   const clearTempCart = () => {
-    setTempCart([]);
+    setTempCartState([]);
   };
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
-        tempCart,
+        tempCart: tempCartState,
         addToCart,
         removeFromCart,
         updateQuantity,
-        setSelectedItems,
+        setTempCart,
         clearTempCart,
+        setCartItems, // Add this line
       }}
     >
       {children}

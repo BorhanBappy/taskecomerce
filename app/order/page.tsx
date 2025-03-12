@@ -19,7 +19,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const OrderPage = () => {
-  const { tempCart, clearTempCart } = useCart();
+  const { tempCart, clearTempCart, setCartItems } = useCart(); // Add cartItems and setCartItems
   const {
     register,
     handleSubmit,
@@ -38,7 +38,8 @@ const OrderPage = () => {
     console.log("Order Submitted:", data);
     alert("Order placed successfully!");
     reset();
-    clearTempCart(); // Clear the temporary cart after order submission
+    clearTempCart(); // Clear the temporary cart
+    setCartItems([]); // Clear the cart items after order submission
   };
 
   // Handle empty tempCart state
@@ -147,10 +148,10 @@ const OrderPage = () => {
 
             {/* Back to Cart Button */}
             <Link
-              href="/cart"
+              href="/"
               className="inline-block ml-4 text-gray-600 hover:text-gray-800"
             >
-              Back to Cart
+              Back to Product
             </Link>
           </form>
         </div>
