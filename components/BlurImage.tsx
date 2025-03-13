@@ -10,7 +10,7 @@ const images: string[] = [
 
 const BlurImage: React.FC = () => {
   return (
-    <div className="container mx-auto flex gap-4 p-4 justify-center">
+    <div className="container mx-auto flex flex-col sm:flex-row gap-4 p-4 justify-center">
       {images.map((src, index) => (
         <div key={index} className="group relative overflow-hidden rounded-lg">
           <Image

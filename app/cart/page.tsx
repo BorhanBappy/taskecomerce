@@ -96,7 +96,7 @@ const CartPage = () => {
                 onClick={() => removeFromCart(item.id, item.variation)}
                 className="text-red-500 hover:text-red-600 font-semibold transition duration-200 cursor-pointer"
               >
-                <FontAwesomeIcon icon={faTrash} />
+                <FontAwesomeIcon icon={faTrash} className="h-30 w-30" />
               </button>
             </div>
           ))}
@@ -105,13 +105,11 @@ const CartPage = () => {
             <p className="text-lg font-semibold text-gray-800">
               Total Items: {cartItems.length}
             </p>
-            <p className="text-2xl font-bold text-gray-900">
+
+            <p className="text-2xl font-bold text-primary">
               Total: ${calculateTotal()}
             </p>
-          </div>
-
-          {/* Proceed to Checkout Button */}
-          <div className="mt-4 flex justify-end">
+            {/* Proceed to Checkout Button */}
             <button
               onClick={handleCheckout}
               className="px-6 py-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-700 transition duration-200 cursor-pointer"
