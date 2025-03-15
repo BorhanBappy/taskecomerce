@@ -8,7 +8,7 @@ const MobileMenu = () => {
   return (
     <div className=" flex justify-center z-30 ">
       {/* Hamburger Icon */}
-      <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+      <button onClick={() => setIsOpen(!isOpen)} className="text-blue-700">
         {isOpen ? "❌" : <AlignJustify className="h-6 w-6" />}
       </button>
 

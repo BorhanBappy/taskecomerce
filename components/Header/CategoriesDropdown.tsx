@@ -14,7 +14,7 @@ const CategoriesDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="flex gap-4 uppercase items-center max-w-[420px] md:w-[300px] bg-orange-600 p-2 sm:p-6 text-sm sm:text-xl text-white">
+        <div className="flex gap-4 uppercase items-center max-w-[420px] md:w-[300px] bg-orange-600 sm:p-3 text-sm sm:text-sm text-white">
           <SidebarIcon />
           ALL CATEGORIES
         </div>

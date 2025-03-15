@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const DesktopMenu = () => {
   return (
-    <div className="gap-6 items-center text-xl hidden xl:flex">
+    <div className="gap-6 items-center text-sm hidden xl:flex">
       <Link
         href="/"
         className="cursor-pointer hover:text-primary transition-colors"
