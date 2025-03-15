@@ -51,7 +51,7 @@ const CustomPrevArrow = (props: { onClick: any }) => {
   return (
     <button
       onClick={onClick}
-      className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 z-10"
+      className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-primary bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 z-10"
     >
       &#10094; {/* Left arrow symbol */}
     </button>
@@ -65,7 +65,7 @@ const CustomNextArrow = (props: { onClick: any }) => {
   return (
     <button
       onClick={onClick}
-      className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 z-10"
+      className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-primary bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 z-10"
     >
       &#10095; {/* Right arrow symbol */}
     </button>

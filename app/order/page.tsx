@@ -60,7 +60,16 @@ const OrderPage = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-semibold mb-6">Order Details</h1>
+      <div className=" flex justify-between mb-6">
+        <h1 className="text-3xl font-semibold ">Order Details</h1>
+        <Link
+          className="hidden sm:block text-3xl font-semibold  text-primary hover:text-orange-800"
+          href="/cart"
+        >
+          Edit Cart Item
+        </Link>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Side: Product Summary */}
         <div>

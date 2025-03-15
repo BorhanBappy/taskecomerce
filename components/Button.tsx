@@ -9,7 +9,7 @@ interface ButtonProps {
 // Apply the interface to the component
 const Button: React.FC<ButtonProps> = ({ toggleContact, isContactOpen }) => {
   return (
-    <button className="md:hidden focus:outline-none" onClick={toggleContact}>
+    <button className="lg:hidden focus:outline-none" onClick={toggleContact}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className={`h-6 w-6 transition-transform duration-300 ${

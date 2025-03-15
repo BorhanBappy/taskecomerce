@@ -6,7 +6,6 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL;
 // console.log(process.env.NEXT_PUBLIC_API_URL);
 const axiosInstance = axios.create({
   baseURL,
-  timeout: 10000,
 });
 
 // Request interceptor
@@ -17,17 +16,6 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     console.error("Request Interceptor Error:", error);
-    return Promise.reject(error);
-  }
-);
-
-// Response interceptor
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    console.error("Response Interceptor Error:", error);
     return Promise.reject(error);
   }
 );

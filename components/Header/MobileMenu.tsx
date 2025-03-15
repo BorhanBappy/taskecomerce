@@ -6,7 +6,7 @@ const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="xl:hidden p-2 z-10 ">
+    <div className=" flex justify-center z-30 ">
       {/* Hamburger Icon */}
       <button onClick={() => setIsOpen(!isOpen)} className="text-white">
         {isOpen ? "❌" : <AlignJustify className="h-6 w-6" />}
@@ -14,13 +14,13 @@ const MobileMenu = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`absolute left-0  mt-[8px] md:mt-[27px] bg-slate-500 text-4xl transform transition-transform duration-300 p-4 ${
+        className={`absolute left-0 right-0  mt-[50px] md:mt-[60px] bg-slate-500 text-4xl transform transition-transform duration-300 p-4 z-20 ${
           isOpen
             ? "translate-x-0 min-h-screen min-w-screen "
-            : "-translate-x-full md:-translate-x-[150%] opacity-100  min-h-screen min-w-screen"
+            : "-translate-x-full md:-translate-x-[150%] min-h-screen min-w-screen z-20"
         }`}
       >
-        <nav className="flex flex-col gap-4 justify-center items-center">
+        <nav className="flex flex-col gap-4 justify-center items-center z-20">
           <Link
             href="/"
             className="text-white hover:text-primary transition-colors"

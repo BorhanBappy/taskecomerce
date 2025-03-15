@@ -1,4 +1,4 @@
-import { formatPrice } from "@/lib/utils"; // Assuming you have a utility function for formatting prices
+import { formatPrice } from "@/lib/utils";
 
 interface ProductPriceProps {
   minPrice: number;
@@ -26,7 +26,11 @@ const ProductPrice: React.FC<ProductPriceProps> = ({
           {formatPrice(minPrice)} - {formatPrice(maxPrice)}
         </p>
       )}
-
+      {discountedPrice !== null && (
+        <span className=" py-8 text-red-600 text-3xl">
+          / Save {discountPrice}
+        </span>
+      )}
       {/* Display combination-specific pricing */}
       {isCombination && (
         <div className="mt-4">
@@ -40,12 +44,17 @@ const ProductPrice: React.FC<ProductPriceProps> = ({
 
           {/* Display original price with strikethrough if discounted */}
           {discountedPrice && (
-            <p
-              className="text-lg font-semibold text-gray-400 line-through"
-              style={{ textDecorationColor: "red" }}
-            >
-              {formatPrice(price)}
-            </p>
+            <>
+              <p
+                className="text-lg font-semibold text-gray-400 line-through"
+                style={{ textDecorationColor: "red" }}
+              >
+                {formatPrice(price)}
+              </p>
+              <p className="text-green-600 text-lg font-semibold">
+                Save {discountPrice}
+              </p>
+            </>
           )}
         </div>
       )}

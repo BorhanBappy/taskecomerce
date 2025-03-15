@@ -5,6 +5,7 @@ import StarRating from "./Starrating";
 import { faHeart, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { formatPrice } from "@/lib/utils";
 
 interface ProductType {
   id: number;
@@ -70,8 +71,8 @@ function Product({ product }: ProductProps) {
       <div className="flex flex-col items-center cursor-pointer group relative overflow-hidden">
         {/* Discount Badge */}
         {maxDiscount > 0 && (
-          <div className=" absolute right-8 sm:right-2 flex h-15 w-15 items-center justify-center rounded-full bg-red-300 ">
-            <h1 className="text-xl text-blue-950 font-bold">-{maxDiscount}%</h1>
+          <div className=" absolute right-8 sm:right-2 flex h-15 w-15 items-center justify-center rounded-full bg-red-600 ">
+            <h1 className="text-xl text-white font-bold">-{maxDiscount}%</h1>
           </div>
         )}
         <div className="flex">
@@ -108,8 +109,8 @@ function Product({ product }: ProductProps) {
         <h1 className="hover:text-primary">{product.name}</h1>
         <StarRating maxRating={5} color="gray" size={5} fillColor={5} />
         {/* <h1>{product.category.name}</h1> */}
-        <h1 className="translate-y-[0%] group-hover:translate-y-[100%] animation opacity-100 group-hover:opacity-0">
-          ${lowestPrice} - ${highestPrice}
+        <h1 className="translate-y-[0%] group-hover:translate-y-[100%] animation opacity-100 group-hover:opacity-0 text-primary text-xl">
+          {formatPrice(lowestPrice)} - {formatPrice(highestPrice)}
         </h1>
         <div className="flex gap-2 absolute right-50% bottom-0 translate-y-[90%] group-hover:translate-y-[0%] animation opacity-0 group-hover:opacity-100">
           <button className="bg-primary text-white p-2 rounded-3xl cursor-pointer">

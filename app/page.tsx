@@ -11,7 +11,7 @@ import ProductList from "@/components/DataFetch";
 
 export default function Home() {
   return (
-    <div>
+    <div className="min-h-screen">
       <HomePage />
       <ShippingDelivery />
       <BlurImage />

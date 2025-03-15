@@ -36,6 +36,7 @@ const footerData = [
     items: ["Product Support", "PC Setup & Support", "Services"],
   },
 ];
+
 interface SectionStates {
   categories: boolean;
   information: boolean;
@@ -43,6 +44,7 @@ interface SectionStates {
   shops: boolean;
   contact: boolean;
 }
+
 const Footer = () => {
   // State object to manage open/close state for each section
   const [sectionStates, setSectionStates] = useState<SectionStates>({
@@ -54,7 +56,6 @@ const Footer = () => {
   });
 
   // Toggle function for each section
-  // Define the type for the toggleSection function parameter
   const toggleSection = (section: keyof SectionStates) => {
     setSectionStates((prev) => ({
       ...prev,
@@ -66,8 +67,8 @@ const Footer = () => {
     <footer className="">
       {/* Newsletter Section */}
       <div className="bg-[#f0f0f0]">
-        <div className="container mx-auto flex flex-col md:flex-row py-[30px] gap-4 items-center">
-          <h1 className="text-sm sm:text-xl md:text-2xl uppercase px-8">
+        <div className="container mx-auto flex flex-col md:flex-row gap-4 items-center">
+          <h1 className="text-sm md:text-xl lg:text-2xl uppercase px-8">
             Sign up for newsletter
           </h1>
           <div className="flex p-2">
@@ -84,113 +85,111 @@ const Footer = () => {
       </div>
 
       {/* Footer Columns */}
-      <div className="container mx-auto gap-2 flex flex-col md:flex-row p-8 md:gap-6 lg:gap-16 justify-center">
-        <div className="flex flex-col gap-2 md:flex-row md:gap-6 lg:gap-16 justify-between ">
-          {/* All Categories */}
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-lg font-semibold">All Categories</h3>
-              <Button
-                toggleContact={() => toggleSection("categories")}
-                isContactOpen={sectionStates.categories}
-              />
-            </div>
-            <ul
-              className={`space-y-2 mt-2 ${
-                sectionStates.categories ? "block" : "hidden"
-              } md:block`}
-            >
-              {footerData[0].items.map((item, itemIndex) => (
-                <li
-                  key={itemIndex}
-                  className="group block w-full text-gray-700 hover:text-primary cursor-pointer transition-transform duration-300 hover:translate-x-2"
-                >
-                  &nbsp;&gt; {item}
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* Information */}
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-lg font-semibold">Information</h3>
-              <Button
-                toggleContact={() => toggleSection("information")}
-                isContactOpen={sectionStates.information}
-              />
-            </div>
-            <ul
-              className={`space-y-2 mt-4 ${
-                sectionStates.information ? "block" : "hidden"
-              } md:block`}
-            >
-              {footerData[1].items.map((item, itemIndex) => (
-                <li
-                  key={itemIndex}
-                  className="group block w-full text-gray-700 hover:text-primary cursor-pointer transition-transform duration-300 hover:translate-x-2"
-                >
-                  &nbsp;&gt; {item}
-                </li>
-              ))}
-            </ul>
+      <div className="container mx-auto flex flex-col gap-2 lg:flex-row lg:gap-6 xl:gap-16 justify-between mt-4 p-2">
+        {/* All Categories */}
+        <div>
+          <div className="flex items-center gap-2 min-w-[180px] ">
+            <h3 className="text-lg font-semibold w-full">All Categories</h3>
+            <Button
+              toggleContact={() => toggleSection("categories")}
+              isContactOpen={sectionStates.categories}
+            />
           </div>
-
-          {/* Brands */}
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-lg font-semibold">Brands</h3>
-              <Button
-                toggleContact={() => toggleSection("brands")}
-                isContactOpen={sectionStates.brands}
-              />
-            </div>
-            <ul
-              className={`space-y-2 mt-4  ${
-                sectionStates.brands ? "block" : "hidden"
-              } md:block`}
-            >
-              {footerData[2].items.map((item, itemIndex) => (
-                <li
-                  key={itemIndex}
-                  className="group block w-full text-gray-700 hover:text-primary cursor-pointer transition-transform duration-300 hover:translate-x-2"
-                >
-                  &nbsp;&gt; {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Shops & Support */}
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-lg font-semibold">Shops & Support</h3>
-              <Button
-                toggleContact={() => toggleSection("shops")}
-                isContactOpen={sectionStates.shops}
-              />
-            </div>
-            <ul
-              className={`space-y-2 mt-4 ${
-                sectionStates.shops ? "block" : "hidden"
-              } md:block`}
-            >
-              {footerData[3].items.map((item, itemIndex) => (
-                <li
-                  key={itemIndex}
-                  className="group block w-full text-gray-700 hover:text-primary cursor-pointer transition-transform duration-300 hover:translate-x-2"
-                >
-                  &nbsp;&gt; {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul
+            className={`space-y-2 mt-2 ${
+              sectionStates.categories ? "block" : "hidden"
+            } lg:block`}
+          >
+            {footerData[0].items.map((item, itemIndex) => (
+              <li
+                key={itemIndex}
+                className="group block w-full text-gray-700 hover:text-primary cursor-pointer transition-transform duration-300 hover:translate-x-2"
+              >
+                &nbsp;&gt; {item}
+              </li>
+            ))}
+          </ul>
         </div>
 
+        {/* Information */}
+        <div>
+          <div className="flex items-center gap-2 ">
+            <h3 className="text-lg font-semibold  w-full">Information</h3>
+            <Button
+              toggleContact={() => toggleSection("information")}
+              isContactOpen={sectionStates.information}
+            />
+          </div>
+          <ul
+            className={`space-y-2 mt-4 ${
+              sectionStates.information ? "block" : "hidden"
+            } lg:block`}
+          >
+            {footerData[1].items.map((item, itemIndex) => (
+              <li
+                key={itemIndex}
+                className="group block w-full text-gray-700 hover:text-primary cursor-pointer transition-transform duration-300 hover:translate-x-2"
+              >
+                &nbsp;&gt; {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Brands */}
+        <div>
+          <div className="flex items-center gap-2">
+            <h3 className="text-lg font-semibold  w-full">Brands</h3>
+            <Button
+              toggleContact={() => toggleSection("brands")}
+              isContactOpen={sectionStates.brands}
+            />
+          </div>
+          <ul
+            className={`space-y-2 mt-4 ${
+              sectionStates.brands ? "block" : "hidden"
+            } lg:block`}
+          >
+            {footerData[2].items.map((item, itemIndex) => (
+              <li
+                key={itemIndex}
+                className="group block w-full text-gray-700 hover:text-primary cursor-pointer transition-transform duration-300 hover:translate-x-2"
+              >
+                &nbsp;&gt; {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Shops & Support */}
+        <div>
+          <div className="flex items-center gap-2 min-w-[180px]">
+            <h3 className="text-lg font-semibold  w-full">Shops & Support</h3>
+            <Button
+              toggleContact={() => toggleSection("shops")}
+              isContactOpen={sectionStates.shops}
+            />
+          </div>
+          <ul
+            className={`space-y-2 mt-4 ${
+              sectionStates.shops ? "block" : "hidden"
+            } lg:block`}
+          >
+            {footerData[3].items.map((item, itemIndex) => (
+              <li
+                key={itemIndex}
+                className="group block w-full text-gray-700 hover:text-primary cursor-pointer transition-transform duration-300 hover:translate-x-2"
+              >
+                &nbsp;&gt; {item}
+              </li>
+            ))}
+          </ul>
+        </div>
         {/* Contact Section */}
         <div>
-          <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Contact Us</h3>
+          <div className="flex justify-between items-center min-w[250px]">
+            <h3 className="text-lg font-semibold ">Contact Us</h3>
             <Button
               toggleContact={() => toggleSection("contact")}
               isContactOpen={sectionStates.contact}
@@ -199,7 +198,7 @@ const Footer = () => {
           <ul
             className={`space-y-2 mt-4 ${
               sectionStates.contact ? "block" : "hidden"
-            } md:block`}
+            } lg:block`}
           >
             <li className="flex gap-2 items-center">
               <FontAwesomeIcon icon={faAddressBook} />
@@ -209,16 +208,14 @@ const Footer = () => {
               <FontAwesomeIcon icon={faPhone} />
               Call us now: (011+) 4567 421 978
             </li>
-
             <li className="flex gap-2 items-center">
               <FontAwesomeIcon icon={faMailBulk} />
               Email: contact@revo.com
             </li>
           </ul>
-          <div className="flex flex-wrap  items-center gap-4 p-4">
+          <div className="flex flex-wrap items-center gap-4 p-4">
             {/* QR Code Image */}
             <div className="group relative w-14 h-14 overflow-hidden">
-              {/* Image */}
               <Image
                 src="https://cdn11.bigcommerce.com/s-cslhb9s4uy/content/site/app/app-qrcode.png"
                 alt="QR Code"
@@ -226,8 +223,6 @@ const Footer = () => {
                 height={160}
                 className="w-full h-full object-cover"
               />
-
-              {/* Overlay */}
               <div className="absolute inset-0 bg-[rgba(255,255,255,0.4)] opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"></div>
             </div>
 
@@ -259,48 +254,40 @@ const Footer = () => {
       </div>
 
       {/* Bottom Header */}
-
       <div className="p-4">
-        {" "}
         <div className="hidden md:flex gap-6 items-center justify-center text-2xl">
-          {/* Categories Dropdown */}
-          <Link href="/" className="cursor-pointer  hover:text-primary">
+          <Link href="/" className="cursor-pointer hover:text-primary">
             HOME
           </Link>
-          <Link href="/" className="cursor-pointer  hover:text-primary">
-            AYOUT{" "}
+          <Link href="/" className="cursor-pointer hover:text-primary">
+            LAYOUT
           </Link>
-
-          <Link href="/" className="cursor-pointer  hover:text-primary">
-            BLOG{" "}
+          <Link href="/" className="cursor-pointer hover:text-primary">
+            BLOG
           </Link>
-
-          <Link href="/" className="cursor-pointer  hover:text-primary">
-            ABOUT US{" "}
+          <Link href="/" className="cursor-pointer hover:text-primary">
+            ABOUT US
           </Link>
-
-          <Link href="/" className="cursor-pointer  hover:text-primary">
-            BONUS PAGE{" "}
+          <Link href="/" className="cursor-pointer hover:text-primary">
+            BONUS PAGE
           </Link>
         </div>
-        <div className=" flex justify-center p-2">
-          <h3 className=" max-w-[650px] text-center text-gray-500 ">
-            {" "}
+        <div className="flex justify-center p-2">
+          <h3 className="max-w-[650px] text-center text-gray-500">
             Contrary to popular belief, Lorem Ipsum is not simply random text.
             It has roots in a piece of classical Latin literature from 45 BC,
             making it over 2000 years old.
           </h3>
         </div>
       </div>
+
+      {/* Footer Bottom */}
       <div className="bg-[#3b3b3b] flex justify-center p-4">
-        <p className=" text-gray-500">
-          {" "}
+        <p className="text-gray-500">
           2025 Ecommerce SB Revo - Home2 Powered by{" "}
-          <strong className=" text-primary hover:text-white">
-            BigCommerce
-          </strong>
-          . Designed by
-          <strong className=" text-primary  hover:text-white">
+          <strong className="text-primary hover:text-white">BigCommerce</strong>
+          . Designed by{" "}
+          <strong className="text-primary hover:text-white">
             Revotheme.com
           </strong>
         </p>

@@ -42,7 +42,9 @@ const CartPage = () => {
                 <Image
                   src={item.image}
                   alt={item.name}
-                  layout="fill"
+                  fill
+                  priority={false}
+                  loading="lazy"
                   objectFit="cover"
                   className="rounded-lg shadow-md"
                 />
