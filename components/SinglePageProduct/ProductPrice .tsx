@@ -22,15 +22,18 @@ const ProductPrice: React.FC<ProductPriceProps> = ({
     <div>
       {/* Display min and max price if not a combination */}
       {!isCombination && (
-        <p className="text-orange-500 text-2xl font-bold mt-4">
+        <p className="text-orange-500 text-xl font-bold mt-4">
           {formatPrice(minPrice)} - {formatPrice(maxPrice)}
         </p>
       )}
-      {discountedPrice !== null && (
-        <span className=" py-8 text-red-600 text-3xl">
-          / Save {discountPrice}
+
+      {/* Display "Save" only if isCombination is false and discountPrice > 0 */}
+      {!isCombination && discountPrice > 0 && (
+        <span className="py-8 text-red-600 text-xl">
+          Save {formatPrice(discountPrice)}
         </span>
       )}
+
       {/* Display combination-specific pricing */}
       {isCombination && (
         <div className="mt-4">
@@ -51,9 +54,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({
               >
                 {formatPrice(price)}
               </p>
-              <p className="text-green-600 text-lg font-semibold">
-                Save {discountPrice}
-              </p>
+              {/* Do not show "Save" for combinations */}
             </>
           )}
         </div>

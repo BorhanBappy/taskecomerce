@@ -14,7 +14,7 @@ const MobileMenu = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`absolute left-0 right-0  mt-[50px] md:mt-[60px] bg-slate-500 text-4xl transform transition-transform duration-300 p-4 z-20 ${
+        className={`absolute left-0 right-0  mt-[50px] md:mt-[49px] bg-slate-500 text-4xl transform transition-transform duration-300 p-4 z-20 ${
           isOpen
             ? "translate-x-0 min-h-screen min-w-screen "
             : "-translate-x-full md:-translate-x-[150%] min-h-screen min-w-screen z-20"

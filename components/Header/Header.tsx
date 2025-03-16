@@ -78,7 +78,7 @@ const Header = () => {
                 {/* My Account Dropdown (shadcn Dropdown Menu) */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <div className="flex-col justify-center justify-items-center xl:hidden">
+                    <div className="flex-col justify-center justify-items-center xl:hidden ">
                       <CircleUserIcon className="h-6 w-6 text-primary" />
                       <h1>Account</h1>
                     </div>

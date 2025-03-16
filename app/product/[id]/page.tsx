@@ -111,10 +111,10 @@ const ProductDetails = () => {
     <div>
       <div className="container mx-auto p-6">
         <Breadcrumb category={product.category} productName={product.name} />
-        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center md:gap-4 lg:gap-0">
           <ProductImages images={images} />
           <div>
-            <h1 className="text-3xl font-semibold">{product.name}</h1>
+            <h1 className="text-2xl font-semibold">{product.name}</h1>
             <h1>{product.code}</h1>
             <ProductPrice
               minPrice={minPrice}

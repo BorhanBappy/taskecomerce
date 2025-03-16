@@ -38,11 +38,11 @@ const MiddleHeader = () => {
       />
 
       {/* Search Bar - Full Width */}
-      <div className="flex items-center border-2 rounded-sm md:rounded-full border-orange-600 bg-primary grow w max-w-2xl w-full ">
+      <div className="flex items-center border-2 rounded-sm md:rounded-l-full  border-primary bg-primary grow w max-w-2xl w-full ">
         <input
           type="text"
           placeholder={displayText}
-          className="w-full p-2 outline-none  rounded-l-full focus:border-blue-500 bg-white"
+          className="w-full p-2 outline-none  focus:border-blue-500 bg-white rounded-sm md:rounded-l-full"
         />
         <button className="p-2 bg-primary text-white rounded-full hover:bg-orange-700 ">
           <SearchIcon className="w-5 h-5" />
